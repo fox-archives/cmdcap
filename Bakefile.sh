@@ -23,7 +23,7 @@ task.prerun() {
 
 task.run() {
 	if (( $# == 0)); then
-		./asciicast2gif/asciicast2gif ./example/output.json ./examplesutput.gif ./example/output.png
+		./asciicast2gif/asciicast2gif ./example/output.json ./example/output.gif ./example/output.png
 	else
 		./asciicast2gif/asciicast2gif "$@"
 	fi

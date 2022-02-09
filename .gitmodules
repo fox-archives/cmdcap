@@ -1,0 +1,3 @@
+[submodule "asciicast2gif"]
+	path = asciicast2gif
+	url = https://github.com/asciinema/asciicast2gif

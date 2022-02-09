@@ -1,27 +1,30 @@
 # shellcheck shell=bash
+# shellcheck disable=SC2164
 
 task.init() {
 	git submodule update --init --recursive
-	cd asciicast2gif
+
+	cd ./asciicast2gif
+	git apply ../patches/png.patch
 	npm install
 }
 
 task.build() {
-	cd asciicast2gif
+	cd ./asciicast2gif
 	npm run build
 }
 
 task.prerun() {
-	cd .hidden
-	LC_ALL=en_US.UTF-8 ./input.sh
-	sed -i '$ d' ./.hidden/output.json # remove last 'exit' line
+	cd ./example
+	LC_ALL=en_US.UTF-8 ./input.tcl
+	tput cnorm
+	sed -i '$ d' ./output.json # remove last 'exit' line
 }
 
 task.run() {
-	cd asciicast2gif
 	if (( $# == 0)); then
-		DEBUG=1 ./asciicast2gif ../.hidden/output.json ../.hidden/output.gif ../.hidden/output.png
+		./asciicast2gif/asciicast2gif ./example/output.json ./examplesutput.gif ./example/output.png
 	else
-		./asciicast2gif "$@"
+		./asciicast2gif/asciicast2gif "$@"
 	fi
 }

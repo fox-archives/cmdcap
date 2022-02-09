@@ -1,0 +1,6 @@
+{"version": 2, "width": 111, "height": 21, "timestamp": 1644393132, "idle_time_limit": 2.0, "env": {"SHELL": "/bin/bash", "TERM": "xterm-256color"}}
+[0.018923, "o", "\u001b[?2004hbash-5.1$ "]
+[0.496474, "o", "ls ~\r\n"]
+[0.496582, "o", "\u001b[?2004l\r"]
+[0.500388, "o", "'Calibre Library'   Desk   Downloads\t git\t Public    Templates\t     workspaces\r\n challenges\t    Dls    experiments\t Music\t repos\t   Vids\r\n data\t\t    Docs   Games\t Pics\t scripts  'VirtualBox VMs'\r\n"]
+[0.500762, "o", "\u001b[?2004hbash-5.1$ "]

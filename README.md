@@ -14,3 +14,15 @@ cd asciicast2png
 ./bake prerun
 ./bake run
 ```
+
+## Example
+
+See the example in [`./example`](./example). Below are the results
+
+### png
+
+![png displaying the last frame](./example/output.png)
+
+### gif
+
+![asciinema output gif](./example/output.gif)

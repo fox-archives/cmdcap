@@ -18,7 +18,6 @@ task.prerun() {
 	cd ./example
 	LC_ALL=en_US.UTF-8 ./input.tcl
 	tput cnorm
-	sed -i '$ d' ./output.json # remove last 'exit' line
 }
 
 task.run() {

@@ -1,5 +1,4 @@
 #!/usr/bin/env tclsh
-# package require Tcl 8.5
 package require Expect
 
 proc die {msg} {
@@ -123,9 +122,16 @@ Example:
 
 	exp_send -- "\x04"
 	expect eof
-	sleep 4
+	sleep 0.3
+
 	removeLastLine $flagOutput
 	removeLastLine $flagOutput
+
+	set cmdcapDir [file normalize [info script]]
+	set cmdcapDir [file dirname [file dirname [file dirname [file dirname $cmdcapDir]]]]
+
+	exec $cmdcapDir/asciicast2gif/asciicast2gif \
+		$flagOutput ./example/output.gif ./example/output.png >@stdout 2>@stderr
 }
 
 proc removeLastLine {filename} {

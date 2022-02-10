@@ -16,11 +16,9 @@ task.build() {
 
 task.run() {
 	# Basalt currently doesn't support Tcl, so we fake it
-	BASALT_PACKAGE_DIR=$PWD tclsh "$PWD/pkg/bin/cmdcap.tcl" -c 'ls -al -- ~' -o ./example/output.json
-
 	if (( $# == 0)); then
-		./asciicast2gif/asciicast2gif ./example/output.json ./example/output.gif ./example/output.png
+		BASALT_PACKAGE_DIR=$PWD tclsh "$PWD/pkg/bin/cmdcap.tcl" -c 'ls -al -- ~' -o ./example/output.json
 	else
-		./asciicast2gif/asciicast2gif "$@"
+		BASALT_PACKAGE_DIR=$PWD tclsh "$PWD/pkg/bin/cmdcap.tcl" "$@"
 	fi
 }

@@ -15,7 +15,6 @@ cd cmdcap
 ./bake build
 
 # To run the example
-./bake prerun
 ./bake run
 ```
 
@@ -30,3 +29,9 @@ See the example in [`./example`](./example). Below are the results
 ### gif
 
 ![asciinema output gif](./example/output.gif)
+
+## Roadmap
+
+- Optionally pass in bash file
+- Defaults that look better
+- Automatically set width and height

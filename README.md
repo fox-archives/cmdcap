@@ -1,12 +1,16 @@
-# asciicast2png
+# cmdcap
 
-[asciicast2gif](https://github.com/asciinema/asciicast2gif) patches to write the final frame of the gif as png
+Automated command capturer
+
+## Summary
+
+Uses a patched version of [asciicast2gif](https://github.com/asciinema/asciicast2gif) and [Expect](https://core.tcl-lang.org/expect/index) to automatically capture the output of commands in GIF and PNG format
 
 ## Usage
 
 ```sh
-git clone https://github.com/hyperupcall/asciicast2png
-cd asciicast2png
+git clone https://github.com/hyperupcall/cmdcap
+cd cmdcap
 ./bake init
 ./bake build
 

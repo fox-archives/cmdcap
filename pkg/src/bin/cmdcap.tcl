@@ -18,6 +18,8 @@ proc main {} {
 	set flagCommand ""
 	set flagInput ""
 	set flagOutput ""
+	set flagWidth 100
+	set flagHeight 45
 	# set flagRcfile ""
 
 	for {set i 0} {$i < $::argc} {incr i} {
@@ -61,6 +63,32 @@ proc main {} {
 
 				if {[string match "-*" $flagOutput]} {
 					die "No value supplied for flag '--output'"
+				}
+			}
+			--width {
+				incr i
+
+				if {$i >= $::argc} {
+					die "No value supplied for flag '--width'"
+				}
+
+				set flagWidth [lindex $::argv $i]
+
+				if {[string match "-*" $flagWidth]} {
+					die "No value supplied for flag '--width'"
+				}
+			}
+			--height {
+				incr i
+
+				if {$i >= $::argc} {
+					die "No value supplied for flag '--height'"
+				}
+
+				set flagHeight [lindex $::argv $i]
+
+				if {[string match "-*" $flagHeight]} {
+					die "No value supplied for flag '--height'"
 				}
 			}
 			--rcfile {
@@ -130,6 +158,7 @@ Example:
 
 	set send_human {.1 .3 1 .05 2}
 
+	sleep 0.3
 	set shouldSendInput 0
 	for {set i 0} {$i < [llength $lines]} {incr i} {
 		set line [lindex $lines $i]
@@ -156,6 +185,7 @@ Example:
 	removeLastLine $flagOutput
 
 	exec $cmdcapDir/asciicast2gif/asciicast2gif \
+		-t monokai \
 		$flagOutput ./example/output.gif ./example/output.png >@stdout 2>@stderr
 }
 

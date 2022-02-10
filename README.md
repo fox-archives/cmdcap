@@ -32,4 +32,4 @@ See the example in [`./example`](./example). Below are the results
 
 ## Roadmap
 
-- Automatically set width and height
+- Launch an arbitrary terminal emulator and fix width / height issues

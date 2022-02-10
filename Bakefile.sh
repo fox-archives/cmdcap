@@ -14,13 +14,10 @@ task.build() {
 	npm run build
 }
 
-task.prerun() {
-	cd ./example
-	LC_ALL=en_US.UTF-8 ./input.tcl
-	tput cnorm
-}
-
 task.run() {
+	# Basalt currently doesn't support Tcl, so we fake it
+	BASALT_PACKAGE_DIR=$PWD tclsh "$PWD/pkg/bin/cmdcap.tcl" -c 'ls -al -- ~' -o ./example/output.json
+
 	if (( $# == 0)); then
 		./asciicast2gif/asciicast2gif ./example/output.json ./example/output.gif ./example/output.png
 	else

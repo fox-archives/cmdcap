@@ -1,0 +1,9 @@
+[package]
+type = 'tcl'
+name = 'cmdcap'
+slug = 'cmdcap'
+version = '0.1.0'
+authors = ['Edwin Kofler <edwin@kofler.dev>']
+description = 'Automated command capturer'
+
+binDirs = ['pkg/bin']

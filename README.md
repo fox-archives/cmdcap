@@ -32,6 +32,4 @@ See the example in [`./example`](./example). Below are the results
 
 ## Roadmap
 
-- Optionally pass in bash file
-- Defaults that look better
 - Automatically set width and height

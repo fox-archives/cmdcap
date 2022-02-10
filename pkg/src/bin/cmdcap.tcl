@@ -1,4 +1,6 @@
 #!/usr/bin/env tclsh
+# '8.6' for try command
+package require Tcl 8.6
 package require Expect
 
 proc die {msg} {
@@ -10,9 +12,13 @@ proc main {} {
 	# This is necessary for 'asciinema' to work
 	set ::env(LC_ALL) "en_US.UTF-8"
 
+	variable cmdcapDir [file normalize [info script]]
+	variable cmdcapDir [file dirname [file dirname [file dirname [file dirname $cmdcapDir]]]]
+
 	set flagCommand ""
 	set flagInput ""
 	set flagOutput ""
+	# set flagRcfile ""
 
 	for {set i 0} {$i < $::argc} {incr i} {
 		set arg [lindex $::argv $i]
@@ -57,6 +63,19 @@ proc main {} {
 					die "No value supplied for flag '--output'"
 				}
 			}
+			--rcfile {
+				incr i
+
+				if {$i >= $::argc} {
+					die "No value supplied for flag '--rcfile'"
+				}
+
+				set flagRcfile [lindex $::argv $i]
+
+				if {[string match "-*" $flagRcfile]} {
+					die "No value supplied for flag '--rcfile'"
+				}
+			}
 			-h|--help {
 				puts "cmdcap
 Usage:
@@ -82,6 +101,11 @@ Example:
 		die "Failed to pass output file"
 	}
 
+	if {[info exists flagRcfile]} {
+		if {! [file exists $flagRcfile]} {
+			die "Specified rcfile '$flagRcfile' does not exist"
+		}
+	}
 
 	# set 'lines'
 	if {$flagCommand == ""} {
@@ -96,7 +120,11 @@ Example:
 	}
 
 	# Spawn process
-	spawn asciinema rec --overwrite -i 2 -c "bash --noprofile --norc" $flagOutput
+	if {[info exists flagRcfile]} {
+		spawn asciinema rec --overwrite -i 2 -c "bash --noprofile --rcfile $flagRcfile" $flagOutput
+	} else {
+		spawn asciinema rec --overwrite -i 2 -c "bash --noprofile --rcfile $cmdcapDir/example/rcfile.sh" $flagOutput
+	}
 	expect "* you're done"
 	sleep 0.3
 
@@ -126,9 +154,6 @@ Example:
 
 	removeLastLine $flagOutput
 	removeLastLine $flagOutput
-
-	set cmdcapDir [file normalize [info script]]
-	set cmdcapDir [file dirname [file dirname [file dirname [file dirname $cmdcapDir]]]]
 
 	exec $cmdcapDir/asciicast2gif/asciicast2gif \
 		$flagOutput ./example/output.gif ./example/output.png >@stdout 2>@stderr
